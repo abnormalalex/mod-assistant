@@ -17,6 +17,7 @@ enum
     ASSISTANT_GOSSIP_UTILITIES       = 700,
     ASSISTANT_GOSSIP_PROFESSIONS     = 800,
     ASSISTANT_GOSSIP_INSTANCES       = 900,
+    ASSISTANT_GOSSIP_ENCHANTS        = 1000,
 
     ASSISTANT_GOSSIP_TEXT            = 48,
 
@@ -26,6 +27,7 @@ enum
     ASSISTANT_VENDOR_GLYPH           = 9000003,
     ASSISTANT_VENDOR_GEM             = 9000023,
     ASSISTANT_VENDOR_CONTAINER       = 9000030,
+    ASSISTANT_VENDOR_ENCHANTS        = 9000031,
 
     PROFESSION_LEVEL_APPRENTICE      = 75,
     PROFESSION_LEVEL_JOURNEYMAN      = 150,
@@ -112,6 +114,20 @@ enum
 #define GOSSIP_CONTINUE_TRANSACTION "Do you wish to continue the transaction?"
 #define GOSSIP_PREVIOUS_PAGE "Previous Page"
 
+#define GOSSIP_ENCHANTS "Я хочу зачариться"
+#define GOSSIP_ENCHANTS_HEAD "Голова"
+#define GOSSIP_ENCHANTS_SHOULDERS "Плечи"
+#define GOSSIP_ENCHANTS_CLOAK "Плащ"
+#define GOSSIP_ENCHANTS_CHEST "Грудь"
+#define GOSSIP_ENCHANTS_BRACERS "Наручи"
+#define GOSSIP_ENCHANTS_GLOVES "Перчатки"
+#define GOSSIP_ENCHANTS_LEGS "Ноги"
+#define GOSSIP_ENCHANTS_BOOTS "Ботинки"
+#define GOSSIP_ENCHANTS_WEAPON "Оружие"
+#define GOSSIP_ENCHANTS_2HWEAPON "Двуручное оружие"
+#define GOSSIP_ENCHANTS_SHIELD "Щит"
+
+
 class Assistant : public CreatureScript, WorldScript
 {
 public:
@@ -129,6 +145,7 @@ private:
     bool GlyphsEnabled;
     bool GemsEnabled;
     bool ContainersEnabled;
+    bool EnchantsEnabled;
 
     uint32 GetGlyphId(uint32 /*id*/, bool /*major*/);
 

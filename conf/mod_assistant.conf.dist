@@ -7,12 +7,14 @@
 # Glyphs include every major and minor glyph for all classes
 # Gems include all glyphs relevant for level 80 classes
 # Containers include the lowest amount of slot bags by default
+# Enchants include all available enchants for each item slot
 #
 
 Assistant.Heirlooms.Enabled  = 1
 Assistant.Glyphs.Enabled     = 1
 Assistant.Gems.Enabled       = 1
 Assistant.Containers.Enabled = 1
+Assistant.Enchants.Enabled   = 1
 
 #################################
 
