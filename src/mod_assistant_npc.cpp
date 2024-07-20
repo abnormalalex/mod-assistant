@@ -24,6 +24,11 @@ bool Assistant::OnGossipHello(Player* player, Creature* creature)
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_CONTAINERS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_CONTAINER);
     }
 
+    if (EnchantsEnabled)
+    {
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_ENCHANTS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS);
+    }
+
     if (UtilitiesEnabled)
     {
         AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_UTILITIES, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_UTILITIES);
@@ -58,6 +63,66 @@ bool Assistant::OnGossipSelect(Player* player, Creature* creature, uint32 sender
     if (action == 1)
     {
         OnGossipHello(player, creature);
+    }
+    else if (action == ASSISTANT_GOSSIP_ENCHANTS)
+    {
+        ClearGossipMenuFor(player);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_HEAD, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 1);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_SHOULDERS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 2);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_CLOAK, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 3);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_CHEST, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 4);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_BRACERS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 5);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_GLOVES, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 6);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_LEGS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 7);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_BOOTS, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 8);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_WEAPON, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 9);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_2HWEAPON, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 10);
+        AddGossipItemFor(player, GOSSIP_ICON_VENDOR, GOSSIP_ENCHANTS_SHIELD, GOSSIP_SENDER_MAIN, ASSISTANT_GOSSIP_ENCHANTS + 11);
+        AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_PREVIOUS_PAGE, GOSSIP_SENDER_MAIN, 1);
+        SendGossipMenuFor(player, ASSISTANT_GOSSIP_TEXT, creature->GetGUID());
+    }
+    else if (action >= ASSISTANT_GOSSIP_ENCHANTS + 1 && action <= ASSISTANT_GOSSIP_ENCHANTS + 11)
+    {
+        uint32 id = 0;
+
+        switch (action)
+        {
+        case ASSISTANT_GOSSIP_ENCHANTS + 1:
+            id = ASSISTANT_VENDOR_ENCHANTS;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 2:
+            id = ASSISTANT_VENDOR_ENCHANTS + 1;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 3:
+            id = ASSISTANT_VENDOR_ENCHANTS + 2;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 4:
+            id = ASSISTANT_VENDOR_ENCHANTS + 3;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 5:
+            id = ASSISTANT_VENDOR_ENCHANTS + 4;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 6:
+            id = ASSISTANT_VENDOR_ENCHANTS + 5;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 7:
+            id = ASSISTANT_VENDOR_ENCHANTS + 6;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 8:
+            id = ASSISTANT_VENDOR_ENCHANTS + 7;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 9:
+            id = ASSISTANT_VENDOR_ENCHANTS + 8;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 10:
+            id = ASSISTANT_VENDOR_ENCHANTS + 9;
+            break;
+        case ASSISTANT_GOSSIP_ENCHANTS + 11:
+            id = ASSISTANT_VENDOR_ENCHANTS + 10;
+            break;   
+        }
+
+        player->GetSession()->SendListInventory(creature->GetGUID(), id);
     }
     else if (action == ASSISTANT_GOSSIP_HEIRLOOM)
     {
